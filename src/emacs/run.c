@@ -1,5 +1,6 @@
 #include <unistd.h>
 
 int main() {
-	execl("/usr/bin/emacs", "emacs", "--fg-daemon", NULL);
+	char *args[] = {"emacs", "--fg-daemon", NULL};
+	execv("/usr/bin/emacs", args);
 }
