@@ -1,8 +1,16 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <dlfcn.h>
 
 int main() {
+	void *lib_handle = dlopen("./libconf.so", RTLD_LAZY);
+	if (lib_handle) {
+		void (*conf)(void) = dlsym(lib_handle, "conf");
+		if (conf) conf();
+		dlclose(lib_handle);
+	}
+
 	char *home_dir = getenv("HOME");
 	int chdir_status = chdir(home_dir);
 
