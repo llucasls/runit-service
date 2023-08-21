@@ -12,9 +12,13 @@ int main() {
 	}
 
 	char *home_dir = getenv("HOME");
-	int chdir_status = chdir(home_dir);
+	if (!home_dir) {
+		perror("HOME environment variable not set");
+		return 1;
+	}
 
-	if (chdir_status != 0) {
+	int chdir_status = chdir(home_dir);
+	if (chdir_status) {
 		perror("failed to change directory");
 		return 1;
 	}
