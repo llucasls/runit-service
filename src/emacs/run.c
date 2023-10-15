@@ -4,6 +4,8 @@
 #include <dlfcn.h>
 
 int main() {
+	dup2(1, 2);
+
 	void *lib_handle = dlopen("./libconf.so", RTLD_LAZY);
 	if (lib_handle) {
 		void (*conf)(void) = dlsym(lib_handle, "conf");
