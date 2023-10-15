@@ -12,7 +12,7 @@ OUT_FILES  := $(BIN_FILES) $(LIB_FILES)
 all: $(OUT_FILES)
 
 $(BIN_FILES): sv/%: src/%.c
-	@mkdir -p $(dir $@)
+	@install -dm 755 $(@D)
 	$(CC) $(CFLAGS) -o $@ $<
 
 $(LIB_FILES): sv/%/libconf.so: src/%/conf.c
