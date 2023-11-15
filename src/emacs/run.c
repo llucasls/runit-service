@@ -25,7 +25,7 @@ int main() {
 		return 1;
 	}
 
-	char *args[] = {"emacs", "--fg-daemon", NULL};
+	char *args[] = {"emacs", "--fg-daemon", "--debug-init", NULL};
 	execv("/usr/bin/emacs", args);
 
 	perror("emacs");
