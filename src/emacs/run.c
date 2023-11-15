@@ -13,7 +13,7 @@ int main() {
 		dlclose(lib_handle);
 	}
 
-	char *home_dir = getenv("HOME");
+	const char *home_dir = getenv("HOME");
 	if (!home_dir) {
 		perror("HOME environment variable not set");
 		return 1;
