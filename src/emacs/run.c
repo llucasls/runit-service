@@ -8,9 +8,19 @@ int main() {
 
 	void *lib_handle = dlopen("./libconf.so", RTLD_LAZY);
 	if (lib_handle) {
-		void (*conf)(void) = dlsym(lib_handle, "conf");
-		if (conf) conf();
+		int status = 0;
+		int (*conf)(void) = dlsym(lib_handle, "conf");
+
+		if (conf)
+			status = conf();
+
 		dlclose(lib_handle);
+
+		if (status != 0) {
+			perror("emacs conf");
+			return status;
+		}
+
 	}
 
 	const char *home_dir = getenv("HOME");
